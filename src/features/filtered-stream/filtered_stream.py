@@ -80,12 +80,37 @@ def get_stream(set):
                 response.status_code, response.text
             )
         )
+    counter = 0
+    lista = []
+    textfile = open("tweets.json", "w")
     for response_line in response.iter_lines():
         if response_line:
             json_response = json.loads(response_line)
-            #print(json.dumps(json_response, indent=4, sort_keys=True))
-            
+            #json_object = json.dumps(json_response, indent=4, sort_keys=True)
+        if counter <= 2000:
+            #print(counter)
+            json_object = json.dumps(json_response, indent=4, sort_keys=True)
+            print(counter)
+            lista.append(str(json_object))
+            counter = counter + 1
+        else:
+            for elemento in lista:
+                textfile.write(elemento + "\n")
+            textfile.close()
+            break
 
+        '''
+        with open("tweets.json", "w") as outfile:
+            outfile.write(json_object)
+        # print(json.dumps(json_response, indent=4, sort_keys=True))
+        counter = counter + 1
+        if counter <= 10:
+            print(counter)
+        else:
+            outfile.close()
+            print("acabou")
+            break
+        '''
 
 def main():
     rules = get_rules()
