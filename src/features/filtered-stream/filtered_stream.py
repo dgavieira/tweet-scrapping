@@ -4,7 +4,7 @@ import json
 
 # To set your enviornment variables in your terminal run the following line:
 # export 'BEARER_TOKEN'='<your_bearer_token>'
-bearer_token = 'AAAAAAAAAAAAAAAAAAAAAAjMUAEAAAAA2IWgeYyQiRquudLkflANYmEIpZc%3DsxgYF5XckTGklaXBuuPbS8V3liLqnlpd6Lt5J8dS5JyAeSuXXt'
+bearer_token = 'AAAAAAAAAAAAAAAAAAAAAAjMUAEAAAAAXnKMCbG7wbd9ogaicwpmy2kgA6c%3DVjVa92pBJTGcCaNoLVkT9A3N8Ak3lUZONdpGl04XChjr2LKYb8'
 
 
 def bearer_oauth(r):
@@ -82,20 +82,22 @@ def get_stream(set):
         )
     counter = 0
     lista = []
-    textfile = open("tweets.json", "w")
+    ROOT_DIR = os.path.dirname(os.path.abspath("tweet-scrapping"))
+    PATH_TWEETS_JSON = ROOT_DIR + r"\data\_processed\tweets.json"
+    textfile = open(PATH_TWEETS_JSON, "w")
     for response_line in response.iter_lines():
         if response_line:
             json_response = json.loads(response_line)
             #json_object = json.dumps(json_response, indent=4, sort_keys=True)
         if counter <= 2000:
             #print(counter)
-            json_object = json.dumps(json_response, indent=4, sort_keys=True)
+            json_object = json.dumps(json_response, indent=1, sort_keys=True)
             print(counter)
             lista.append(str(json_object))
             counter = counter + 1
         else:
             for elemento in lista:
-                textfile.write(elemento + "\n")
+                textfile.write(elemento)
             textfile.close()
             break
 
@@ -121,3 +123,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # ROOT_DIR = os.path.dirname(os.path.abspath("tweet-scrapping"))
+    # print(ROOT_DIR)
