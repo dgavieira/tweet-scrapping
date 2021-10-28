@@ -4,7 +4,7 @@ import json
 
 # To set your enviornment variables in your terminal run the following line:
 # export 'BEARER_TOKEN'='<your_bearer_token>'
-bearer_token = 'AAAAAAAAAAAAAAAAAAAAAAjMUAEAAAAAXnKMCbG7wbd9ogaicwpmy2kgA6c%3DVjVa92pBJTGcCaNoLVkT9A3N8Ak3lUZONdpGl04XChjr2LKYb8'
+
 
 
 def bearer_oauth(r):
